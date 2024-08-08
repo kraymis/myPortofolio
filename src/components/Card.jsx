@@ -15,7 +15,7 @@ const Card = ({ imgSrc, title, description }) => {
         <img
           src={imgSrc}
           alt={title}
-          className="w-auto h-[60%] sm:w-full sm:h-full object-cover transition-transform duration-300 hover:scale-105"  // Ensure image fits container
+          className="w-auto h-[90%] sm:w-full sm:h-full object-cover transition-transform duration-300 hover:scale-105"  // Ensure image fits container
         />
       </div>
       
