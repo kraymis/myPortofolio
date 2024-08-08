@@ -116,17 +116,17 @@ const HomePage = () => {
       <Card 
         imgSrc={imguiux}
         title="UI/UX"
-        description="here's a little description about it"
+        description="Creating intuitive and engaging user interfaces and experiences to ensure seamless interaction with digital products."
       />
       <Card 
         imgSrc={imgcode}
         title="Web Development"
-        description="here's a little description about it"
+        description="Building responsive and dynamic websites using the latest web technologies to bring your ideas to life on the internet."
       />
       <Card 
         imgSrc={imgdesign}
         title="Design"
-        description="here's a little description about it"
+        description="Crafting visually appealing and functional designs that captivate audiences and enhance user engagement across various platforms."
       />
     </div>
 
