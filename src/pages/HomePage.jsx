@@ -64,7 +64,7 @@ const HomePage = () => {
   {/* Text and Button Container */}
   <div className="text-white w-full lg:w-1/2 h-fit flex flex-col items-center px-6 sm:px-0 lg:items-start gap-3 order-2 lg:order-1">
     <p className="text-4xl max-sm:text-3xl md:text-5xl lg:text-6xl font-light">
-      I am <span className="text-[#7456FF] font-semibold">KR4YM1S</span>
+      I am <span className="text-[#7456FF] font-semibold">KRAYMIS</span>
     </p>
     <h6 className="text-[#999999] text-sm max-sm:text-xs text-center lg:text-start md:text-base lg:text-lg mb-2 lg:mb-4">
       Junior UI/UX designer and a frontend web developer
