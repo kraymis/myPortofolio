@@ -9,7 +9,7 @@ const defaultProps = {
 
 const Card2 = ({ imgSrc, title, description }) => {
   return (
-    <div className="w-[25vw] h-auto  bg-transparent border  text-white border-0 shadow-md overflow-hidden flex flex-col items-center px-4 py-4 gap-2 transition-transform duration-300 ">
+    <div className="w-[70vw] lg:w-[25vw] h-auto  bg--transparent  text-white border-0 shadow-md overflow-hidden flex flex-col items-center px-4 py-4 gap-2 transition-transform duration-300 ">
       {/* Image Container */}
       <div className="w-[50%]  flex flex-col items-center hover:scale-110 transition-transform duration-300">
         <img

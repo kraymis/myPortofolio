@@ -7,6 +7,9 @@ module.exports = withMT({
   ],
   theme: {
     extend: {
+      screens: {
+        'max-sm': { 'max': '640px' }, // Custom max-width breakpoint for <= 640px
+      },
       animation: {
         shake: 'shake 0.5s ease-in-out',
       },
