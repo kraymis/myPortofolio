@@ -28,7 +28,7 @@ function Slider() {
     >
       <SwiperSlide>
         <EcommerceCard
-        projectName='KraIN'
+        projectName='KrayIN'
         description='KrayIN is a MERN stack social media app for creating posts, interacting with friends, and real-time messaging.'
         img={imgkrayin}
         link="https://github.com/kraymis/KrayIN"
