@@ -4,6 +4,7 @@ import imgcarbon from '../assets/carbon.jpg';
 import imgtonobiltek from '../assets/tonobiltek.png';
 import imgeduhack from '../assets/eduhack.png';
 import imgcarbocount from '../assets/carbocount.png';
+import imgkrayin from '../assets/krayin.png';
 import imgdoctofy from '../assets/doctofy.png';
 import imgquizz from '../assets/quizz.png';
 import {EcommerceCard} from '../components/EcommerceCard.jsx'
@@ -27,6 +28,15 @@ function Slider() {
     >
       <SwiperSlide>
         <EcommerceCard
+        projectName='KraIN'
+        description='KrayIN is a MERN stack social media app for creating posts, interacting with friends, and real-time messaging.'
+        img={imgkrayin}
+        link="https://github.com/kraymis/KrayIN"
+        type="WEB DEV"
+        />
+      </SwiperSlide>
+      <SwiperSlide>
+        <EcommerceCard
         projectName='Doctofy'
         description='Prototype design of a desktop app for managing a medical clinic of an orthophonist.'
         img={imgdoctofy}
@@ -41,7 +51,7 @@ function Slider() {
         description='FrontEND development of a web app for calculating the carbon footprint of companies, completed in a team.'
         img={imgcarbocount}
         link="https://github.com/DonDraper04/CarboCount"
-        type="WEBDEV"
+        type="WEB DEV"
         />
       </SwiperSlide>
 
