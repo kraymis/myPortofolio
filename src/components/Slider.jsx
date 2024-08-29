@@ -35,6 +35,8 @@ function Slider() {
         link="https://github.com/kraymis/unreadEchoes"
         type="WEB DEV"
         />
+      </SwiperSlide>
+      <SwiperSlide>
         <EcommerceCard
         projectName='KrayIN'
         description='KrayIN is a MERN stack social media app for creating posts, interacting with friends, and real-time messaging.'
