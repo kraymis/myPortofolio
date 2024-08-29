@@ -7,6 +7,7 @@ import imgcarbocount from '../assets/carbocount.png';
 import imgkrayin from '../assets/krayin.png';
 import imgdoctofy from '../assets/doctofy.png';
 import imgquizz from '../assets/quizz.png';
+import imgechoes from '../assets/unreadechoes.png';
 import {EcommerceCard} from '../components/EcommerceCard.jsx'
 
 // Import Swiper styles
@@ -27,6 +28,13 @@ function Slider() {
     className="mySwiper"
     >
       <SwiperSlide>
+        <EcommerceCard
+        projectName='Unread Echoes'
+        description='Unread Echoes is an anonymous platform for sharing unsent messages and unspoken feelings.'
+        img={imgechoes}
+        link="https://github.com/kraymis/unreadEchoes"
+        type="WEB DEV"
+        />
         <EcommerceCard
         projectName='KrayIN'
         description='KrayIN is a MERN stack social media app for creating posts, interacting with friends, and real-time messaging.'
