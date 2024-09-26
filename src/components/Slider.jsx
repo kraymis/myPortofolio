@@ -3,6 +3,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import imgcarbon from '../assets/carbon.jpg';
 import imgtonobiltek from '../assets/tonobiltek.png';
 import imgeduhack from '../assets/eduhack.png';
+import imgekomm from '../assets/e-komm.png';
 import imgcarbocount from '../assets/carbocount.png';
 import imgkrayin from '../assets/krayin.png';
 import imgdoctofy from '../assets/doctofy.png';
@@ -27,6 +28,15 @@ function Slider() {
     modules={[EffectCards]}
     className="mySwiper"
     >
+      <SwiperSlide>
+        <EcommerceCard
+        projectName='eKomm'
+        description='eKomm, an e-Commerce MERN Stack APP.'
+        img={imgekomm}
+        link="https://github.com/kraymis/eKomm"
+        type="WEB DEV"
+        />
+      </SwiperSlide>
       <SwiperSlide>
         <EcommerceCard
         projectName='Unread Echoes'
