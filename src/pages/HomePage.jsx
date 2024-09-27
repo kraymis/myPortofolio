@@ -215,7 +215,7 @@ const HomePage = () => {
         <div className="w-6 h-6 flex justify-center items-center">
           <img src={imggithub} alt="GitHub" className="w-full h-full object-cover" />
         </div>
-        <p className="text-base sm:text-lg">GitHub</p>
+        <p className="text-base sm:text-lg md:text-lg">GitHub</p>
       </a>
     </div>
   </div>
