@@ -1,241 +1,657 @@
-import React, {useRef} from 'react';
-import NavBar from '../components/NavBar';
-import ButtonWithImage from '../components/ButtonWithImage';
-import image from '../assets/2022_01_05_12_49_IMG_4437.jpg';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import imageana from '../assets/ana.jpg';
 import imgcarbon from '../assets/carbon.jpg';
-import { EmailCONTACT } from '../components/EmailCONTACT.jsx';
-import Slider from '../components/Slider.jsx';
-import DownloadButton from '../components/DownloadButton.jsx';
-import Card from '../components/Card.jsx';
-import Card2 from '../components/Card2.jsx';
-import imgdesign from "../assets/design.png"
-import imgcode from "../assets/code.png"
-import imguiux from "../assets/uiux.png"
-import imgwork from "../assets/work.png"
-import imgcommunicate from "../assets/communicate.png"
-import imgverify from "../assets/verify.png"
-import imglike from "../assets/like.png"
-import imgphone from "../assets/phone-call.png"
-import imggithub from "../assets/github.png"
-import imglinkedin from "../assets/linkedin.png"
-import imgemail from "../assets/email.png"
+import imgtonobiltek from '../assets/tonobiltek.png';
+import imgeduhack from '../assets/eduhack.png';
+import imgekomm from '../assets/e-komm.png';
+import imgcarbocount from '../assets/carbocount.png';
+import imgkrayin from '../assets/krayin.png';
+import imgdoctofy from '../assets/doctofy.png';
+import imgquizz from '../assets/quizz.png';
+import imgechoes from '../assets/unreadechoes.png';
+import imgsi from '../assets/certiflow.png';
+import imgcarsprediction from '../assets/cars.jpg';
+import imgaudit from '../assets/audit.jpg';
+import imgcv from '../assets/cv.jpg';
+import imgsentiment from '../assets/sentiment.jpg';
+import imgurba from '../assets/urba.jpg';
+import imgwedding from '../assets/weddinginv.png';
+import imgplan from '../assets/planfinancement.png';
+import imgrag from '../assets/pferag.png';
 
+const filters = ['ALL', 'AI / DATA', 'INFORMATION SYSTEMS', 'DEVELOPMENT', 'WEB', 'UI / UX'];
+
+const featuredProjects = [
+  {
+    title: 'Amazon Sentiment Analysis',
+    subtitle: 'NLP / DistilBERT',
+    type: 'AI / DATA',
+    year: '2026',
+    tags: ['AI / DATA'],
+    link: 'https://github.com/kraymis/sentiment-analysis-amazon',
+  },
+  {
+    title: 'RAG PFE',
+    subtitle: 'Document Retrieval & Semantic Search',
+    type: 'AI / DATA',
+    year: '2026',
+    tags: ['AI / DATA'],
+    link: 'https://github.com/kraymis/rag-pfe',
+  },
+  {
+    title: 'SI support à la certification ISO 9001 – ESI Alger',
+    subtitle: 'Conception d’un système d’information intégrant cartographie des processus, GED, versioning, KPI, traçabilité et suivi des actions correctives. Modélisation avec Merise/UML autour du cycle PDCA et prise en compte des audits internes et externes.',
+    type: 'INFORMATION SYSTEMS',
+    year: 'Fév. – Juin 2026',
+    tags: ['INFORMATION SYSTEMS'],
+    link: 'https://drive.google.com/file/d/1B_wdSNwCyI81cDXU2LT2RyY8aIytwEpV/view?usp=sharing',
+  },
+  {
+    title: 'Used Car Price Prediction',
+    subtitle: 'Machine Learning & Data Analysis',
+    type: 'AI / DATA',
+    year: '2026',
+    tags: ['AI / DATA'],
+    link: 'https://github.com/kraymis/used-car-price-prediction',
+  },
+  {
+    title: 'Audit de l’outil Talents.esi.dz – ESI Alger',
+    subtitle: 'Audit du module « Enseignants » portant sur l’ergonomie, l’efficience, la fiabilité des données et la gouvernance du système. Référentiel basé sur COBIT 2019, ITIL 4 et ISO/IEC 25010, collecte d’évidences, analyse des écarts et des risques, puis formulation d’un plan d’actions priorisé.',
+    type: 'INFORMATION SYSTEMS',
+    year: 'Mai 2026',
+    tags: ['INFORMATION SYSTEMS'],
+    link: 'https://drive.google.com/file/d/1HRwbFfQn9IjQa-pa-PwOjTFkCrmNj0lu/view?usp=sharing',
+  },
+  {
+    title: 'Urbanisation du Système d’Information d’EGDA – Grande Distribution',
+    subtitle: 'Diagnostic du SI, analyse des processus métier et de l’alignement SI/Métier, puis proposition d’une architecture cible intégrant CRM, e-commerce, supply chain et gouvernance SI. Modélisation des processus avec BPMN 2.0 et conception d’une cartographie fonctionnelle urbanisée.',
+    type: 'INFORMATION SYSTEMS',
+    year: 'Avr. – Mai 2026',
+    tags: ['INFORMATION SYSTEMS'],
+    link: 'https://drive.google.com/file/d/1tnLdwFtB1OK4NOL8V9Ks9xUv9iC5isOo/view?usp=sharing',
+  },
+  {
+    title: 'Wedding Invitation',
+    subtitle: 'Interactive web experience',
+    type: 'WEB',
+    year: '2025',
+    tags: ['WEB'],
+    link: 'https://github.com/kraymis/wedding-invitation',
+  },
+];
+
+const otherProjects = [
+  {
+    title: 'CarboCOUNT',
+    subtitle: 'Carbon footprint web platform',
+    type: 'DEVELOPMENT',
+    year: '2024',
+    tags: ['DEVELOPMENT'],
+    link: 'https://github.com/DonDraper04/CarboCount',
+  },
+  {
+    title: 'Plan Financement COFI',
+    subtitle: 'Financial planning and scenario analysis',
+    type: 'DEVELOPMENT',
+    year: '2025',
+    tags: ['DEVELOPMENT'],
+    link: 'https://github.com/kraymis/plan_financement_cofi',
+  },
+  {
+    title: 'Semantic CV Indexing / Hayat Algérie',
+    subtitle: 'CV processing and semantic indexing',
+    type: 'AI / DATA',
+    year: '2025',
+    tags: ['AI / DATA'],
+    link: 'https://github.com/kraymis',
+  },
+  {
+    title: 'eKomm',
+    subtitle: 'E-commerce application',
+    type: 'WEB',
+    year: '2024',
+    tags: ['WEB'],
+    link: 'https://github.com/kraymis/eKomm',
+  },
+  {
+    title: 'Unread Echoes',
+    subtitle: 'Anonymous social message platform',
+    type: 'WEB',
+    year: '2024',
+    tags: ['WEB'],
+    link: 'https://github.com/kraymis/unreadEchoes',
+  },
+  {
+    title: 'KrayIN',
+    subtitle: 'Social media application',
+    type: 'WEB',
+    year: '2024',
+    tags: ['WEB'],
+    link: 'https://github.com/kraymis/KrayIN',
+  },
+  {
+    title: 'Doctofy',
+    subtitle: 'Clinic management interface concept',
+    type: 'UI / UX',
+    year: '2024',
+    tags: ['UI / UX'],
+    link: 'https://www.figma.com/design/Sm8U8myiTqJBRrRpVjlcNV/Doctofy?node-id=0-1&t=5Z9Rp0Txtvpwl9FF-1',
+  },
+  {
+    title: 'Quizz',
+    subtitle: 'Interactive event quiz experience',
+    type: 'UI / UX',
+    year: '2024',
+    tags: ['UI / UX'],
+    link: 'https://www.figma.com/design/ULXU0jivBTeyU8AGODRnMS/Activit%C3%A9-Stand?node-id=0-1&t=T0YbOnlPWYNInFnH-1',
+  },
+  {
+    title: 'TONOBILTEK',
+    subtitle: 'Car market price prediction UI concept',
+    type: 'UI / UX',
+    year: '2024',
+    tags: ['UI / UX'],
+    link: 'https://www.figma.com/design/dJ6icWy8YAyMCeX6PhLr2d/TC?node-id=0-1&t=Z0FBneRkUnpJlOEV-1',
+  },
+  {
+    title: 'EduHACK',
+    subtitle: 'Educational event landing page',
+    type: 'UI / UX',
+    year: '2023',
+    tags: ['UI / UX'],
+    link: 'https://www.figma.com/design/sg5xCi8dKyy4ZjVo13EG3L/Edu-Hack-ESMS%5BCSE%5D-TEAM-01?node-id=0-1&t=nY1JdpBZpcPyK9Ay-1',
+  },
+];
+
+const allProjects = [...featuredProjects, ...otherProjects];
+const PROJECTS_PER_PAGE = 5;
+const ambientParticles = Array.from({ length: 14 }, (_, index) => ({
+  id: index,
+  left: `${8 + ((index * 37) % 84)}%`,
+  top: `${10 + ((index * 61) % 76)}%`,
+  delay: `${(index % 5) * -1.7}s`,
+}));
+const projectPreviews = {
+  'SI support à la certification ISO 9001 – ESI Alger': imgsi,
+  'Audit de l’outil Talents.esi.dz – ESI Alger': imgaudit,
+  'Urbanisation du Système d’Information d’EGDA – Grande Distribution': imgurba,
+  'RAG PFE': imgrag,
+  'Used Car Price Prediction': imgcarsprediction,
+  'Amazon Sentiment Analysis': imgsentiment,
+  'Semantic CV Indexing / Hayat Algérie': imgcv,
+  'Plan Financement COFI': imgplan,
+  'Wedding Invitation': imgwedding,
+  CarboCOUNT: imgcarbocount,
+  eKomm: imgekomm,
+  'Unread Echoes': imgechoes,
+  KrayIN: imgkrayin,
+  Doctofy: imgdoctofy,
+  Quizz: imgquizz,
+  TONOBILTEK: imgtonobiltek,
+  EduHACK: imgeduhack,
+};
+
+const expertiseItems = [
+  {
+    title: 'INFORMATION SYSTEMS',
+    description:
+      'Working with information systems analysis, audit, process modeling, business workflows and information structures in practical digital contexts.',
+  },
+  {
+    title: 'DATA & AI',
+    description:
+      'Exploring machine learning, NLP, data analysis and AI-based systems through small but concrete projects and experiments.',
+  },
+  {
+    title: 'WEB DEVELOPMENT',
+    description:
+      'Building web applications and digital products with a focus on clarity, usability and maintainable front-end implementation.',
+  },
+  {
+    title: 'GRAPHIC DESIGN',
+    description:
+      'Creating visual assets and communication materials with attention to composition, consistency and clear visual expression.',
+  },
+  {
+    title: 'UI / UX DESIGN',
+    description:
+      'Designing clear interfaces and interaction flows that are functional, readable and aligned with real user needs.',
+  },
+];
+
+const experienceItems = [
+  {
+    year: '2025',
+    company: 'HAYAT ALGÉRIE',
+    title: 'Semantic CV Indexing / AI-related internship',
+    description:
+      'Worked on a CV processing and semantic indexing project focused on automating the analysis of candidate profiles. The internship involved working with OCR to extract information from CVs, NLP techniques to process and structure textual data, and classification methods to identify and organize candidate information. The project aimed to make CV search and candidate matching more efficient by transforming unstructured documents into searchable and structured data.',
+  },
+  {
+    year: '2024 — 2025',
+    company: 'ETIC CLUB — ESI ALGIERS',
+    title: 'External Relations & Logistics Manager',
+    description:
+      'Managed the club’s external relations and logistics activities, including contacting and coordinating with companies, speakers and external partners. Contributed to organizing events and initiatives such as S2EE, while helping build and maintain relationships with external organizations. The role also involved coordinating logistics, following up with partners, managing outreach efforts and supporting the team in the preparation and execution of major club activities.',
+  },
+];
+
+const stackGroups = {
+  'INFORMATION SYSTEMS': ['Information Systems', 'SI Urbanization', 'Audit', 'Information Systems Analysis', 'Business Intelligence', 'ISO 9001 / Quality Management'],
+  'DATA / AI': ['Python', 'Pandas', 'NumPy', 'Scikit-learn', 'PyTorch', 'Hugging Face', 'NLP', 'Machine Learning', 'Deep Learning', 'RAG'],
+  DEVELOPMENT: ['JavaScript', 'React', 'Node.js', 'Express.js', 'MongoDB', 'REST APIs', 'Git', 'GitHub'],
+  DESIGN: ['Figma', 'UI/UX Design', 'Illustrator', 'Photoshop'],
+};
 
 const HomePage = () => {
   const homeRef = useRef(null);
-  const projectsRef = useRef(null);
-  const servicesRef = useRef(null);
-  const whymeRef = useRef(null);
+  const workRef = useRef(null);
+  const aboutRef = useRef(null);
+  const whatIDoRef = useRef(null);
+  const experienceRef = useRef(null);
   const contactRef = useRef(null);
 
-  const scrollToSection = (ref) => {
-      const offset = 210; // Adjust this value as needed
-      const element = ref.current;
-      const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
-      const offsetPosition = elementPosition - offset;
+  const [activeFilter, setActiveFilter] = useState('ALL');
+  const [currentProjectPage, setCurrentProjectPage] = useState(1);
+  const [activeWorkItem, setActiveWorkItem] = useState(0);
+  const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
+  const [isMobile, setIsMobile] = useState(false);
+  const [theme, setTheme] = useState(() => localStorage.getItem('portfolio-theme') || 'dark');
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const [isScrolling, setIsScrolling] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-      window.scrollTo({
-          top: offsetPosition,
-          behavior: 'smooth',
-      });
+  useEffect(() => {
+    let scrollStopTimer;
+    const updateMobile = () => setIsMobile(window.innerWidth <= 768);
+    const handlePointerMove = (event) => {
+      setCursorPos({ x: event.clientX, y: event.clientY });
+    };
+    const handleScroll = () => {
+      const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
+      setScrollProgress(scrollableHeight > 0 ? (window.scrollY / scrollableHeight) * 100 : 0);
+      setIsScrolling(true);
+      window.clearTimeout(scrollStopTimer);
+      scrollStopTimer = window.setTimeout(() => setIsScrolling(false), 180);
+    };
+    const revealObserver = new IntersectionObserver(
+      (entries) => entries.forEach((entry) => entry.isIntersecting && entry.target.classList.add('is-visible')),
+      { threshold: 0.12 }
+    );
+
+    updateMobile();
+    handleScroll();
+    window.addEventListener('resize', updateMobile);
+    window.addEventListener('pointermove', handlePointerMove);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    document.querySelectorAll('.section, .site-footer').forEach((element) => revealObserver.observe(element));
+
+    return () => {
+      window.removeEventListener('resize', updateMobile);
+      window.removeEventListener('pointermove', handlePointerMove);
+      window.removeEventListener('scroll', handleScroll);
+      window.clearTimeout(scrollStopTimer);
+      revealObserver.disconnect();
+    };
+  }, []);
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+    localStorage.setItem('portfolio-theme', theme);
+  }, [theme]);
+
+  const scrollToSection = (ref) => {
+    if (!ref.current) return;
+    setIsMenuOpen(false);
+    const top = ref.current.offsetTop - 72;
+    window.scrollTo({ top, behavior: 'smooth' });
   };
 
+  const visibleProjects = useMemo(() => {
+    return allProjects.filter((project) => activeFilter === 'ALL' || project.tags.includes(activeFilter));
+  }, [activeFilter]);
+
+  const totalProjectPages = Math.ceil(visibleProjects.length / PROJECTS_PER_PAGE);
+  const paginatedProjects = visibleProjects.slice(
+    (currentProjectPage - 1) * PROJECTS_PER_PAGE,
+    currentProjectPage * PROJECTS_PER_PAGE
+  );
+
+  const changeFilter = (filter) => {
+    setActiveFilter(filter);
+    setCurrentProjectPage(1);
+  };
 
   return (
-    <div className=''>
-        <NavBar
-                scrollToSection={scrollToSection}
-                homeRef={homeRef}
-                projectsRef={projectsRef}
-                servicesRef={servicesRef}
-                whymeRef={whymeRef}
-                contactRef={contactRef}
-        />
-<div ref={homeRef} className="flex flex-col lg:flex-row justify-start mt-[10vh] px-12 lg:mt-[25vh] lg:px-[8vw] gap-4 sm:gap-0 md:px-16 mb-8">
-  
-  {/* Image Container */}
-  <div className='w-full mb-8 sm:mb-0 lg:w-[50%] lg:h-auto h-[80%] flex justify-center lg:items-center order-1 lg:order-2'>
-    <div className="relative w-[13rem] h-[13rem] lg:h-[22rem] lg:w-[22rem] mt-6 lg:mt-0 bg-slate-500 overflow-hidden rounded-full hover:scale-105 transition-transform duration-300">
-      <img src={imageana} alt="Description" className="absolute inset-0 object-cover w-full h-full" />
-    </div>
-  </div>
-
-  {/* Text and Button Container */}
-  <div className="text-white w-full lg:w-1/2 h-fit flex flex-col items-center px-6 sm:px-0 lg:items-start gap-3 order-2 lg:order-1">
-    <p className="text-4xl max-sm:text-3xl md:text-5xl lg:text-6xl font-light">
-      I am <span className="text-[#7456FF] font-semibold">KRAYMIS</span>
-    </p>
-    <h6 className="text-[#999999] text-sm max-sm:text-xs text-center lg:text-start md:text-base lg:text-lg mb-2 lg:mb-4">
-      Junior UI/UX designer and a frontend web developer
-    </h6>
-    <p className="font-light text-center lg:text-start w-full lg:w-3/4 text-xs max-sm:text-xxs md:text-sm lg:text-base text-[#999999] mb-4">
-      MAACHI Mohamed Islam Aymen AKA Kraymis, a 3rd year computer science student at the higher school of computer science (ESI Algiers),
-      passionate about crafting captivating and intuitive digital experiences. With a keen eye for design and a focus on what users see and interact with, I blend creativity with technical skills to create engaging and visually appealing websites and applications.
-    </p>
-    <div className="flex justify-center lg:justify-start gap-x-4">
-      <DownloadButton />
-      <button className="h-auto w-auto md:w-40 lg:w-48 p-4 border border-solid border-gray-50 rounded-lg font-medium text-gray-50 hover:bg-gray-50 hover:text-gray-900 hover:border-gray-900">
-        More
-      </button>
-    </div>
-  </div>
-
-</div>
-
-
-      <div ref={projectsRef} id="projects" className="relative w-full py-12 sm:mt-[20vh] overflow-hidden">
-        <h2 className="text-3xl lg:text-5xl font-bold text-center text-white relative z-10">
-          Projects
-        </h2>
-        <div className="absolute inset-0 flex items-center justify-center">
-          <span className="text-[12vw] font-bold text-transparent text-fill text-stroke text-gray-300 opacity-20">
-            Projects done
-          </span>
-        </div>
+    <div
+      className="portfolio-shell"
+      style={{ '--cursor-x': `${cursorPos.x}px`, '--cursor-y': `${cursorPos.y}px` }}
+    >
+      {!isMobile && <div className="cursor-dot" style={{ left: cursorPos.x, top: cursorPos.y }} />}
+      <div className="ambient-grid" aria-hidden="true" />
+      <div className="ambient-orb ambient-orb-one" aria-hidden="true" />
+      <div className="ambient-orb ambient-orb-two" aria-hidden="true" />
+      <div className="ambient-particles" aria-hidden="true">
+        {ambientParticles.map((particle) => (
+          <span
+            key={particle.id}
+            className="ambient-particle"
+            style={{ left: particle.left, top: particle.top, animationDelay: particle.delay }}
+          />
+        ))}
       </div>
-      <div className="relative w-full flex justify-center items-center z-20 mt-4 sm:mt-[12vh] lg:mb-[20vh] max-w-full overflow-hidden">
-            <div className="w-full max-w-[80vw] flex justify-center">
-                <Slider />
-            </div>
-        </div>
-      
-
-
-      <div ref={servicesRef} id="services" className="relative w-full py-12 sm:mt-[20vh] overflow-hidden">
-        <h2 className="text-3xl lg:text-5xl font-bold text-center text-white relative z-10">
-          Services
-        </h2>
-        <div className="absolute inset-0 flex items-center justify-center">
-          <span className="text-[12vw] font-bold text-transparent text-fill text-stroke text-gray-300 opacity-20">
-            Services
-          </span>
-        </div>
+      <div className="shooting-star shooting-star-one" aria-hidden="true" />
+      <div className="shooting-star shooting-star-two" aria-hidden="true" />
+      <div
+        className={isScrolling ? 'scroll-cat is-walking' : 'scroll-cat'}
+        style={{ top: `calc(8% + ${scrollProgress * 0.84}%)` }}
+        title="A small companion exploring the page"
+        aria-hidden="true"
+      >
+        <svg className="cat-svg" viewBox="0 0 100 100" role="img" aria-label="Small walking cat">
+          <path className="cat-svg-tail" d="M73 69 C94 63, 96 39, 81 34 C91 48, 84 58, 72 57" />
+          <path className="cat-svg-body" d="M33 52 C42 48, 65 49, 73 63 C77 70, 72 81, 62 83 L37 83 C29 79, 26 64, 33 52Z" />
+          <path className="cat-svg-leg cat-svg-leg-back-left" d="M34 72 L34 91 Q34 95 39 94 L42 93 L42 74Z" />
+          <path className="cat-svg-leg cat-svg-leg-back-right" d="M57 74 L57 92 Q57 96 62 94 L65 92 L65 72Z" />
+          <path className="cat-svg-neck" d="M42 55 L59 55 L58 67 L43 67Z" />
+          <path className="cat-svg-ear cat-svg-ear-left" d="M29 27 L34 7 L47 22Z" />
+          <path className="cat-svg-ear cat-svg-ear-right" d="M55 22 L69 7 L75 28Z" />
+          <path className="cat-svg-head" d="M26 28 Q27 19 51 19 Q75 19 76 28 L76 43 Q72 57 51 59 Q30 57 26 43Z" />
+          <path className="cat-svg-ear-inner" d="M32 24 L35 13 L42 22Z M61 22 L68 13 L72 25Z" />
+          <ellipse className="cat-svg-eye" cx="39" cy="36" rx="2.5" ry="3.5" />
+          <ellipse className="cat-svg-eye" cx="63" cy="36" rx="2.5" ry="3.5" />
+          <path className="cat-svg-nose" d="M49 42 L53 42 L51 45Z" />
+          <path className="cat-svg-mouth" d="M51 45 Q48 49 46 47 M51 45 Q54 49 56 47" />
+          <path className="cat-svg-whiskers" d="M43 43 L25 39 M43 47 L24 47 M59 43 L77 39 M59 47 L78 47" />
+          <path className="cat-svg-leg cat-svg-leg-front-left" d="M40 69 L40 91 Q40 95 45 94 L47 92 L47 68Z" />
+          <path className="cat-svg-leg cat-svg-leg-front-right" d="M62 68 L62 91 Q62 95 67 94 L69 92 L69 68Z" />
+        </svg>
       </div>
-      <div className="relative z-20 mt-4 flex flex-col sm:flex-row sm:flex-wrap items-center justify-center gap-8 px-4 sm:px-6 lg:px-12 mb-2 sm:mt-[12vh] sm:mb-[20vh]">
-      <Card 
-        imgSrc={imguiux}
-        title="UI/UX"
-        description="Creating intuitive and engaging user interfaces and experiences to ensure seamless interaction with digital products."
-      />
-      <Card 
-        imgSrc={imgcode}
-        title="Web Development"
-        description="Building responsive and dynamic websites using the latest web technologies to bring your ideas to life on the internet."
-      />
-      <Card 
-        imgSrc={imgdesign}
-        title="Design"
-        description="Crafting visually appealing and functional designs that captivate audiences and enhance user engagement across various platforms."
-      />
-    </div>
+      <div className="scroll-progress" style={{ transform: `scaleX(${scrollProgress / 100})` }} />
 
+      <header className="topbar">
+        <div className="nav-inner">
+         <button type="button" className="brand" onClick={() => scrollToSection(homeRef)}>
+           <span>AYMEN</span>
+           <span className="brand-light">/ MAACHI</span>
+         </button>
 
-
-  <div ref={whymeRef} id="whyme" className="relative w-full py-12 sm:py-12 sm:mt-[20vh] pt-16 mt-8  overflow-hidden">
-  <h2 className="text-3xl sm:text-5xl font-bold text-center text-white relative z-10">
-    WHY HIRE ME
-  </h2>
-  <div className="absolute inset-0 flex items-center justify-center">
-    <span className="text-[12vw] sm:text-[8vw] md:text-[10vw] lg:text-[12vw] font-bold text-transparent text-fill text-stroke text-gray-300 opacity-20">
-      WHY HIRE ME
-    </span>
-  </div>
-</div>
-
-<div className="relative z-20 mt-4 px-4 sm:mt-[12vh] sm:px-[12vw] mb-8 sm:mb-20 overflow-visible ">
-  <div className="flex flex-col sm:flex-row  items-center justify-center ">
-    <Card2 
-      imgSrc={imgwork}
-      title="Workaholic"
-      description="I’m a kind of person who can’t just stand around and doing nothing. I have a tendency to do something productive."
-    />
-    <Card2 
-      imgSrc={imgcommunicate}
-      title="Communicative"
-      description="I have a broad understanding of verbal vocabulary. Therefore, I can convey a message well to the receiver."
-    />
-    <Card2 
-      imgSrc={imglike}
-      title="Cooperative"
-      description="Behind the successful project, there’s a great team. I can build a good cooperation and remain consistent with the goal."
-    />
-    <Card2 
-      imgSrc={imgverify}
-      title="Perfectionist"
-      description="I have a strong intuition. I have remained consistent with high quality standards to present a most worthy result."
-    />
-  </div>
-</div>
-
-
-<div ref={contactRef} id="contact" className="relative w-full py-4 sm:py-12 mt-2 sm:mt-[20vh] overflow-hidden">
-  <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center text-white relative z-10">
-    CONTACT ME
-  </h2>
-  <div className="absolute inset-0 flex items-center justify-center">
-    <span className="text-[12vw] sm:text-[10vw] md:text-[12vw] font-bold text-transparent text-fill text-stroke text-gray-300 opacity-20">
-      CONTACT ME
-    </span>
-  </div>
-</div>
-
-<div className="relative z-20 mt-8 px-8 sm:px-6 md:px-8  sm:mt-[12vh] lg:px-[8vw] flex flex-col lg:flex-row lg:justify-center gap-8 lg:gap-x-[8vw]">
-  <div className="w-full lg:w-[55%] h-auto">
-    <EmailCONTACT />
-  </div>
-  <div className="flex flex-col w-full lg:w-[45%] text-white gap-y-10">
-    <div className="flex flex-col">
-      <p className="text-[#7456FF] text-lg sm:text-xl md:text-2xl">CONTACT</p>
-      <h5 className="text-3xl sm:text-4xl md:text-5xl font-bold">CONTACT ME</h5>
-      <p className="text-[#999999] text-base sm:text-lg md:text-xl">
-        If you have any project in mind, need a service or anything, don't hesitate to contact me.
-      </p>
-    </div>
-    <div className="flex flex-col gap-y-4">
-      <div className="flex items-center gap-x-2 hover:scale-105 transition-transform duration-300">
-        <div className="w-6 h-6 flex justify-center items-center">
-          <img src={imgemail} alt="email" className="w-full h-full object-cover" />
+         <nav className="nav-links" aria-label="Main navigation">
+           <button type="button" onClick={() => scrollToSection(workRef)}>WORK</button>
+           <button type="button" onClick={() => scrollToSection(aboutRef)}>ABOUT</button>
+           <button type="button" onClick={() => scrollToSection(contactRef)}>CONTACT</button>
+           <span className="nav-status"><span className="status-dot" /> AVAILABLE</span>
+           <button
+             type="button"
+             className="theme-toggle"
+             onClick={() => setTheme((currentTheme) => currentTheme === 'dark' ? 'light' : 'dark')}
+             aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+           >
+             {theme === 'dark' ? '☼ LIGHT' : '☾ DARK'}
+           </button>
+         </nav>
+         <button
+           type="button"
+           className={isMenuOpen ? 'mobile-menu-toggle is-open' : 'mobile-menu-toggle'}
+           onClick={() => setIsMenuOpen((open) => !open)}
+           aria-expanded={isMenuOpen}
+           aria-controls="mobile-navigation"
+           aria-label={isMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+         >
+           <span />
+           <span />
+           <span />
+         </button>
         </div>
-        <p className="text-base sm:text-lg">mm_maachi@esi.dz</p>
-      </div>
-      <a href="https://www.linkedin.com/in/mohamed-islam-aymen-maachi-81859925a/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-x-2 hover:scale-105 transition-transform duration-300">
-        <div className="w-6 h-6 flex justify-center items-center">
-          <img src={imglinkedin} alt="LinkedIn" className="w-full h-full object-cover" />
+        <nav id="mobile-navigation" className={isMenuOpen ? 'mobile-nav is-open' : 'mobile-nav'} aria-label="Mobile navigation">
+         <button type="button" onClick={() => scrollToSection(homeRef)}>HOME</button>
+         <button type="button" onClick={() => scrollToSection(aboutRef)}>ABOUT</button>
+         <button type="button" onClick={() => scrollToSection(whatIDoRef)}>WHAT I DO</button>
+         <button type="button" onClick={() => scrollToSection(workRef)}>PROJECTS</button>
+         <button type="button" onClick={() => scrollToSection(contactRef)}>CONTACT</button>
+         <button
+           type="button"
+           className="mobile-theme-toggle"
+           onClick={() => setTheme((currentTheme) => currentTheme === 'dark' ? 'light' : 'dark')}
+         >
+           {theme === 'dark' ? '☼ LIGHT MODE' : '☾ DARK MODE'}
+         </button>
+        </nav>
+      </header>
+
+      <main className="page" ref={homeRef}>
+        <section className="hero section reveal-section">
+         <div className="hero-copy">
+           <div className="eyebrow">AYMEN MAACHI / ESI ALGIERS</div>
+           <h1>
+             AYMEN <span>MAACHI</span>
+           </h1>
+           <div className="hero-divider" />
+           <div className="hero-meta">INFORMATION SYSTEMS · DATA &amp; AI · WEB · DESIGN</div>
+           <p className="lead">
+             Information Systems &amp; Technology student at ESI Algiers, working across information systems,
+             data and AI, web development, graphic design and UI/UX design.
+           </p>
+
+           <div className="hero-actions">
+             <a
+               href="https://drive.google.com/uc?export=download&id=1IBpsrfMssbtmc_hQIgu_Y0VY2aXoZ_YT"
+               target="_blank"
+               rel="noreferrer"
+               className="primary-button"
+             >
+               DOWNLOAD CV
+             </a>
+             <button type="button" className="secondary-button" onClick={() => scrollToSection(workRef)}>
+               VIEW WORK
+             </button>
+           </div>
+
+           <div className="scroll-indicator">SCROLL</div>
+         </div>
+
+         <div className="hero-aside">
+           <div className="portrait-frame interactive-photo">
+             <img src={imageana} alt="Portrait of Aymen Maachi" />
+           </div>
+           <div className="portrait-label">Information Systems · Data &amp; AI · Web · Design</div>
+         </div>
+        </section>
+
+        <section ref={workRef} className="section projects-section reveal-section">
+         <div className="section-heading">
+           <div className="eyebrow">SELECTED WORK</div>
+           <h2>Projects at the center of my current work.</h2>
+         </div>
+
+         <div className="filter-row" aria-label="Project filters">
+           {filters.map((filter) => (
+             <button
+               key={filter}
+               type="button"
+               className={filter === activeFilter ? 'filter-button active' : 'filter-button'}
+               onClick={() => changeFilter(filter)}
+             >
+               {filter}
+             </button>
+           ))}
+         </div>
+
+         <div className="project-list">
+           {paginatedProjects.length > 0 ? (
+             paginatedProjects.map((project, index) => (
+               <a key={project.title} href={project.link} target="_blank" rel="noreferrer" className="project-row">
+                 <span className="project-index">{String(index + 1).padStart(2, '0')}</span>
+                 <div className="project-main">
+                   <div className="project-title-wrap">
+                     <h3>{project.title}</h3>
+                     <span className="arrow">↗</span>
+                   </div>
+                   <p>{project.subtitle}</p>
+                 </div>
+                 <div className="project-meta">
+                   <span>{project.type}</span>
+                   <span>{project.year}</span>
+                 </div>
+                 <img className="project-preview" src={projectPreviews[project.title]} alt="" aria-hidden="true" />
+               </a>
+             ))
+           ) : (
+             <p className="empty-state">No projects match this filter right now.</p>
+           )}
+         </div>
+ 
+         {totalProjectPages > 1 && (
+           <div className="project-pagination" aria-label="Project pages">
+             <button
+               type="button"
+               className="pagination-button"
+               onClick={() => setCurrentProjectPage((page) => page - 1)}
+               disabled={currentProjectPage === 1}
+             >
+               PREV
+             </button>
+             <span className="pagination-status">
+               PAGE {currentProjectPage} / {totalProjectPages}
+             </span>
+             <button
+               type="button"
+               className="pagination-button"
+               onClick={() => setCurrentProjectPage((page) => page + 1)}
+               disabled={currentProjectPage === totalProjectPages}
+             >
+               NEXT
+             </button>
+           </div>
+         )}
+        </section>
+
+        <section ref={aboutRef} className="section about-section reveal-section">
+         <div className="section-heading">
+           <div className="eyebrow">ABOUT</div>
+           <h2>Information Systems student with a practical background in development, design and data.</h2>
+         </div>
+
+         <div className="about-grid">
+           <p>
+             I&apos;m Aymen, a 5th-year Information Systems &amp; Technology student at ESI Algiers. My work sits
+             between information systems, data and AI, web development, graphic design and UI/UX design.
+           </p>
+           <p>
+             I have worked on information systems analysis, data and AI experiments, web projects, graphic design
+             and UI/UX concepts, with an eye for how tools, information and interfaces connect in real projects.
+           </p>
+         </div>
+        </section>
+
+        <section ref={whatIDoRef} className="section what-i-do-section reveal-section">
+         <div className="section-heading">
+           <div className="eyebrow">WHAT I DO</div>
+           <h2>Work across the technical and the design side of digital systems.</h2>
+         </div>
+
+         <div className="services-layout">
+           <div className="service-list" role="tablist" aria-label="Areas of work">
+             {expertiseItems.map((item, index) => (
+               <button
+                 key={item.title}
+                 type="button"
+                 className={index === activeWorkItem ? 'service-item active' : 'service-item'}
+                 onClick={() => setActiveWorkItem(index)}
+                 onMouseEnter={() => setActiveWorkItem(index)}
+               >
+                 <span className="service-number">{String(index + 1).padStart(2, '0')}</span>
+                 <span className="service-title">{item.title}</span>
+               </button>
+             ))}
+           </div>
+
+           <div className="service-detail">
+             <div className="service-detail-number">{String(activeWorkItem + 1).padStart(2, '0')}</div>
+             <h3>{expertiseItems[activeWorkItem].title}</h3>
+             <p>{expertiseItems[activeWorkItem].description}</p>
+           </div>
+         </div>
+        </section>
+
+        <section ref={experienceRef} className="section experience-section reveal-section">
+         <div className="section-heading">
+           <div className="eyebrow">EXPERIENCE</div>
+           <h2>Recent work and practical experience.</h2>
+         </div>
+
+         <div className="timeline">
+           {experienceItems.map((item) => (
+             <div key={item.company} className="timeline-item">
+               <div className="timeline-year">{item.year}</div>
+               <div className="timeline-content">
+                 <h3>{item.company}</h3>
+                 <p>{item.title}</p>
+                 <p className="timeline-description">{item.description}</p>
+               </div>
+             </div>
+           ))}
+         </div>
+        </section>
+
+        <section className="section education-stack-section reveal-section">
+         <div className="education-panel">
+           <div className="eyebrow">EDUCATION</div>
+           <h3>ESI ALGIERS</h3>
+           <p className="edu-role">Engineering Degree</p>
+           <p>Information Systems &amp; Technology</p>
+           <p>2022 — 2027</p>
+           <span className="ranking">6th / 59 — 4th Year</span>
+         </div>
+
+         <div className="stack-panel">
+           <div className="eyebrow">TOOLS / TECHNOLOGIES</div>
+           {Object.entries(stackGroups).map(([group, items]) => (
+             <div key={group} className="stack-group">
+               <h4>{group}</h4>
+               <div className="stack-list">
+                 {items.map((item) => (
+                   <span key={item}>{item}</span>
+                 ))}
+               </div>
+             </div>
+           ))}
+         </div>
+        </section>
+
+        <section ref={contactRef} className="section contact-section reveal-section">
+         <div className="eyebrow">CONTACT</div>
+         <div className="contact-layout">
+           <h2>LET&apos;S CONNECT.</h2>
+           <div className="contact-links">
+             <a href="https://www.linkedin.com/in/mohamed-islam-aymen-maachi-81859925a/" target="_blank" rel="noreferrer">
+               LinkedIn ↗
+             </a>
+             <a href="https://github.com/kraymis" target="_blank" rel="noreferrer">
+               GitHub ↗
+             </a>
+             <a href="mailto:mm_maachi@esi.dz">Email ↗</a>
+             <a
+               href="https://drive.google.com/uc?export=download&id=1i0nK0Sa3JWjT3DMVfPMCCw-uISVy-2YY"
+               target="_blank"
+               rel="noreferrer"
+             >
+               CV ↗
+             </a>
+           </div>
+         </div>
+        </section>
+      </main>
+
+      <footer className="site-footer reveal-section">
+        <div className="footer-inner">
+         <div className="footer-brand">AYMEN MAACHI</div>
+         <div className="footer-meta">Information Systems · Web · Data · Design</div>
+         <button type="button" className="back-top" onClick={() => scrollToSection(homeRef)}>
+           BACK TO TOP
+         </button>
         </div>
-        <p className="text-base sm:text-lg">LinkedIn</p>
-      </a>
-      <div className="flex items-center gap-x-2 hover:scale-105 transition-transform duration-300">
-        <div className="w-6 h-6 flex justify-center items-center">
-          <img src={imgphone} alt="phone" className="w-full h-full object-cover" />
-        </div>
-        <p className="text-base sm:text-lg">+213799592501</p>
-      </div>
-      <a href="https://github.com/kraymis" target="_blank" rel="noopener noreferrer" className="flex items-center gap-x-2 hover:scale-105 transition-transform duration-300">
-        <div className="w-6 h-6 flex justify-center items-center">
-          <img src={imggithub} alt="GitHub" className="w-full h-full object-cover" />
-        </div>
-        <p className="text-base sm:text-lg md:text-lg">GitHub</p>
-      </a>
-    </div>
-  </div>
-
-
-</div>
-
-<footer className='bg-[#7456FF] w-full h-[4vh] mt-[12vh]'></footer>
-
-
-      
-
-
-          
-          
-
-
-
-
-
+      </footer>
     </div>
   );
 };

@@ -68,7 +68,7 @@ function Slider() {
       <SwiperSlide>
         <EcommerceCard
         projectName='CarboCOUNT'
-        description='FrontEND development of a web app for calculating the carbon footprint of companies, completed in a team.'
+        description='Team project building a web application for tracking and reducing a company carbon footprint.'
         img={imgcarbocount}
         link="https://github.com/DonDraper04/CarboCount"
         type="WEB DEV"
@@ -88,7 +88,7 @@ function Slider() {
       <SwiperSlide>
         <EcommerceCard
         projectName='TONOBILTEK'
-        description="Design of a web app prototype implementing an AI model for predicting car market prices."
+        description="UI/UX prototype for a car market price prediction platform with AI-assisted decision support."
         img={imgtonobiltek}
         type="UI/UX"
         link="https://www.figma.com/design/dJ6icWy8YAyMCeX6PhLr2d/TC?node-id=0-1&t=Z0FBneRkUnpJlOEV-1"
@@ -102,6 +102,56 @@ function Slider() {
         img={imgeduhack}
         link='https://www.figma.com/design/sg5xCi8dKyy4ZjVo13EG3L/Edu-Hack-ESMS%5BCSE%5D-TEAM-01?node-id=0-1&t=nY1JdpBZpcPyK9Ay-1'
         type="UI/UX"
+        />
+      </SwiperSlide>
+
+      <SwiperSlide>
+        <EcommerceCard
+          projectName='Used Car Price Prediction'
+          description='Machine learning project for predicting used-car prices from vehicle features using preprocessing, feature engineering and a Random Forest pipeline.'
+          img={imgcarbon}
+          link='https://github.com/kraymis/used-car-price-prediction'
+          type='DATA SCIENCE'
+        />
+      </SwiperSlide>
+
+      <SwiperSlide>
+        <EcommerceCard
+          projectName='PFE Document RAG System'
+          description='Document retrieval and semantic search pipeline using PDF extraction, chunking, multilingual embeddings and FAISS-backed search.'
+          img={imgcarbon}
+          link='https://github.com/kraymis/rag-pfe'
+          type='AI / NLP'
+        />
+      </SwiperSlide>
+
+      <SwiperSlide>
+        <EcommerceCard
+          projectName='Amazon Reviews Sentiment Analysis'
+          description='Sentiment classification project for Amazon reviews using PyTorch and DistilBERT to analyze positive and negative feedback.'
+          img={imgcarbon}
+          link='https://github.com/kraymis/sentiment-analysis-amazon'
+          type='ML / NLP'
+        />
+      </SwiperSlide>
+
+      <SwiperSlide>
+        <EcommerceCard
+          projectName='Plan Financement COFI'
+          description='Financial planning web app for building and analyzing financing scenarios, debt ratios and cash-flow forecasts.'
+          img={imgcarbon}
+          link='https://github.com/kraymis/plan_financement_cofi'
+          type='IS / SOFTWARE'
+        />
+      </SwiperSlide>
+
+      <SwiperSlide>
+        <EcommerceCard
+          projectName='Wedding Invitation'
+          description='Interactive wedding invitation website with animated sections, RSVP handling and a polished responsive guest experience.'
+          img={imgcarbon}
+          link='https://github.com/kraymis/wedding-invitation'
+          type='WEB DEV'
         />
       </SwiperSlide>
 
