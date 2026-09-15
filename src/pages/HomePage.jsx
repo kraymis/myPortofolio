@@ -630,7 +630,7 @@ const HomePage = () => {
              <a href="https://github.com/kraymis" target="_blank" rel="noreferrer">
                GitHub ↗
              </a>
-             <a href="mailto:mm_maachi@esi.dz">Email ↗</a>
+             <a href="mailto:mm_maachi@esi.dz">Email : mm_maachi@esi.dz ↗</a>
              <a
                href="https://drive.google.com/uc?export=download&id=1i0nK0Sa3JWjT3DMVfPMCCw-uISVy-2YY"
                target="_blank"
