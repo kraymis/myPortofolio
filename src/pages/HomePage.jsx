@@ -19,7 +19,7 @@ import imgwedding from '../assets/weddinginv.png';
 import imgplan from '../assets/planfinancement.png';
 import imgrag from '../assets/pferag.png';
 
-const filters = ['ALL', 'AI / DATA', 'INFORMATION SYSTEMS', 'DEVELOPMENT', 'WEB', 'UI / UX'];
+const filters = ['ALL', 'AI / DATA', 'INFORMATION SYSTEMS', 'WEB', 'UI / UX'];
 
 const featuredProjects = [
   {
@@ -84,17 +84,17 @@ const otherProjects = [
   {
     title: 'CarboCOUNT',
     subtitle: 'Carbon footprint web platform',
-    type: 'DEVELOPMENT',
+    type: 'WEB',
     year: '2024',
-    tags: ['DEVELOPMENT'],
+    tags: ['WEB'],
     link: 'https://github.com/DonDraper04/CarboCount',
   },
   {
     title: 'Plan Financement COFI',
     subtitle: 'Financial planning and scenario analysis',
-    type: 'DEVELOPMENT',
+    type: 'WEB',
     year: '2025',
-    tags: ['DEVELOPMENT'],
+    tags: ['WEB'],
     link: 'https://github.com/kraymis/plan_financement_cofi',
   },
   {
